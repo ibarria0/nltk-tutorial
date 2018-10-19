@@ -44,10 +44,15 @@ Deben completar el programa para poder crear el clasificador de text usando la d
 
 
 ## 4. Looking forward (5 mins)
-Tokenization: tf-idf
-NGrams grupos de palabras
-skLearn
-gensim 
+http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.html
+
+1. Tokenization: tf-idf
+
+2. NGrams grupos de palabras
+
+3. skLearn
+
+4. gensim 
 
 
 
