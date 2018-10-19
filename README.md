@@ -11,12 +11,37 @@ Para que la computadora pueda entender el documento se hace lo que se conoce com
 
 ## 1. Feature extraction en palabras - Gender Identification (15 mins)
 https://www.nltk.org/book/ch06.html#gender-identification
+```python
+ def gender_features(word):
+     return {'last_letter': word[-1]}
+     
+  def gender_features2(name):
+     features = {}
+     features["first_letter"] = name[0].lower()
+     features["last_letter"] = name[-1].lower()
+     for letter in 'abcdefghijklmnopqrstuvwxyz':
+         features["count({})".format(letter)] = name.lower().count(letter)
+         features["has({})".format(letter)] = (letter in name.lower())
+     return features
+ 
+```
+
 
 ## 2. Feature extraction en documentos - Sentimientos de reviews de peliculas (15 mins)
 https://www.nltk.org/book/ch06.html#gender-identification
+```python
+ def document_features(document):
+     document_words = set(document)
+     features = {}
+     for word in word_features:
+         features['contains({})'.format(word)] = (word in document_words)
+     return features
+```
+
 
 ## 3. Clasificación de documentos (noticias) en tipos de noticia (45 mins)
-noticias.tar.gz
+Deben completar el programa para poder crear el clasificador de text usando la data que esta en noticias.csv
+
 
 ## 4. Looking forward (5 mins)
 Tokenization: tf-idf
