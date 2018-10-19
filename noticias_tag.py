@@ -6,9 +6,9 @@ stop_words = set(stopwords.words('spanish'))
 
 def tokenize(doc):
     tokens = nltk.word_tokenize(doc.lower())
-    #tokens = [t for t in tokens if t not in stop_words] #remove stopwords
-    #tokens = [t for t in tokens if t.isalpha()] #remove non alphanumeric
-    #tokens = nltk.ngrams(tokens,1)
+    ##remove stopwords
+    ##remove non alphanumeric
+    #posiblemente agregar NGRAMS (aveces es peor)
     #tokens = [stem(t) for t in tokens]
     return tokens
 
@@ -27,6 +27,7 @@ with open('noticias.csv', newline='') as csvfile:
 
 #quitamos la primera fila, los headers
 data = data[1:]
+random.shuffle(data)
 
 #quitamos las otras columnas
 documents = [(doc.lower(),tag) for url,titulo,doc,source,tag in data]
@@ -34,12 +35,13 @@ documents = [(doc.lower(),tag) for url,titulo,doc,source,tag in data]
 #tokenization
 documents = [(tokenize(doc),tag) for doc,tag in documents]
 
-all_words = nltk.FreqDist([token for doc,tag in documents for token in doc])
-word_features = list(all_words)[:200]
+#aqui deben sacar la lista de todas las palabras entre todos los docs para el bag of words
+all_words = nltk.FreqDist('array con todos los tokens')
+word_features = list(all_words)[:2000]
 
-#cargar data y poner en el formato que acepta el clasificador ([caracteristicas],'tag')
-random.shuffle(documents)
-featuresets = [(document_features(d,word_features), c) for (d,c) in documents]
+#poner documentos en el formato que acepta el clasificador ([caracteristicas],'tag')
+#tienen que usar la funciona para extraer las caracteristicas (document_features())
+featuresets = []
 
 train_set, test_set = featuresets[100:], featuresets[:100]
 classifier = nltk.NaiveBayesClassifier.train(train_set)
